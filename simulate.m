@@ -1,13 +1,11 @@
-
-
-SNR_awgn = zeros(10);
-SNR_imp = zeros(10);
-for i=0:3:30
+clr
+for i=0:3:27
 	SNR_awgn(i/3 + 1) = sys_id_LMS(10, 1000, i, 1);
-	SNR_imp(i/3 + 1) = sys_id_LMS(10, 1000, i, 0);
+	display(SNR_awgn)
+	% SNR_imp(i/3 + 1) = sys_id_LMS(10, 1000, i, 0);
 end
 
-x = 0:3:30
+x = 3:3:30;
 plot(x, SNR_awgn, 'b.', x, SNR_imp, 'ro')
 legend('AWGN', 'Impulse Noise')
 title('MSE vs. SNR')
