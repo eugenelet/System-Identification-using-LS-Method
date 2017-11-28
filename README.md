@@ -5,8 +5,8 @@ Model identification using Least Square approximation where either Gaussian Nois
 
 # Results
 ## MSE vs SNR
-![Orig](https://github.com/eugenelet/VisualBackProp-PyTorch/blob/master/image/resized_cat1.jpg)
+![Orig](https://github.com/eugenelet/System-Identification-using-LS-Method/blob/master/mse_snr.jpg)
 
 
 ## MSE vs Monte Carlo Iteration
-![Orig](https://github.com/eugenelet/VisualBackProp-PyTorch/blob/master/image/resized_cat1.jpg)
+![Orig](https://github.com/eugenelet/System-Identification-using-LS-Method/blob/master/mse_vs_monte.jpg)
