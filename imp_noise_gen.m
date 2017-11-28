@@ -23,7 +23,7 @@ while ( ~( (10*log10(var(y)/var(Imp_noise)) <= SNR+0.5) & (10*log10(var(y)/var(I
     for i=1:round(P*N)    % P=0.3 means 30% of samples will be impulsive noise
         %heavy tail noise, which pdf is 1/2*(U[impnoise_bias,impnoise_bias+1]+U[-impnoise_bias,-impnoise_bias-1]),are
         %assigned to random places of Imp_noise
-        Imp_noise(random_idx(i)) = impnoise_bias+rand(1) + j*(impnoise_bias+rand(1)) * (-1)^(randi([0,1]));
+        Imp_noise(random_idx(i)) = (impnoise_bias+rand(1) + j*(impnoise_bias+rand(1))) * (-1)^(randi([0,1]));
     end
     if ( ( P <= max_imp_noise_percentage) & (10*log10(var(y)/var(Imp_noise)) > SNR+0.5) & P > .1 )
         % noise power too low, increaes bias
@@ -36,7 +36,11 @@ while ( ~( (10*log10(var(y)/var(Imp_noise)) <= SNR+0.5) & (10*log10(var(y)/var(I
         % impulsive noise is only 10% or less, but still cannot meet SNR
         % requirement.  Hence, reset sparisty to 50% and reduced bias
         P = max_imp_noise_percentage;
-        impnoise_bias = impnoise_bias - 1;
+        if (SNR >= 12)
+            impnoise_bias = impnoise_bias - 1/(sqrt(SNR) * 20);
+        else
+            impnoise_bias = impnoise_bias - 1;
+        end
     else
         break;
     end

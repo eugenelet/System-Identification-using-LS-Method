@@ -11,6 +11,7 @@ x = monte_carlo_generator(mont_carlo_iter, 100); % Signal generation using monte
 % Generate Additive noise (AWGN or Impulse)
 W = zeros(mont_carlo_iter, 100);
 for i=1:mont_carlo_iter
+	display(i)
 	if noise_type
 		W(i,:) = AWGN(x(i,:), 100, SNR);
 	else
@@ -28,7 +29,7 @@ end
 mse = 0;
 y = zeros(mont_carlo_iter, 100);
 for i=1:mont_carlo_iter
-	h_d = 10 * ( randn(coef + 1, 1) + j * randn(coef + 1, 1)); % Unknown linear system (diff for every simulation)
+	h_d = 10 * ( randn(coef + 1, 1) + j * randn(coef + 1, 1)); % Unknown linear system (different for every simulation)
 	X_ = reshape(X(i,:,:), size(X,2), size(X,3));
 	W_ = reshape(W(i,:), size(W,2), 1);
 	y(i,:) = X_ * h_d + W_; %  Output of uknown system with additive noise
